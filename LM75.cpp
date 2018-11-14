@@ -27,16 +27,16 @@ LM75::LM75 (byte addr) {
   address = addr;
 }
 
-word LM75::float2regdata (float temp)
+uint16_t LM75::float2regdata (float temp)
 {
   // First multiply by 8 and coerce to integer to get +/- whole numbers
   // Then coerce to word and bitshift 5 to fill out MSB
-  return (word)((int)(temp * 8) << 5);
+  return (uint16_t)((int16_t)(temp * 8) << 5);
 }
 
 float LM75::regdata2float (word regdata)
 {
-  return ((float)(int)regdata / 32) / 8;
+  return ((float)(int16_t)regdata / 32) / 8;
 }
 
 word LM75::_register16 (byte reg) {
